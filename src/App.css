@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+/* App.css */
+
+/* Estilo general para la alerta */
+.install-alert {
+  position: fixed;
+  top: 20px; /* Distancia desde la parte superior */
+  left: 50%;
+  transform: translateX(-50%); /* Centrar horizontalmente */
+  background-color: white; /* Fondo blanco */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+  width: 90%; /* Ancho responsivo */
+  max-width: 400px; /* Ancho máximo */
+  text-align: center; /* Centrar texto */
+}
+
+/* Estilos para los botones */
+.install-alert button {
+  background-color: #4CAF50; /* Color de fondo verde */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 15px; /* Espaciado interno */
+  margin: 5px; /* Margen entre botones */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+/* Estilos para el botón "Cerrar" */
+.install-alert button:last-child {
+  background-color: #f44336; /* Color de fondo rojo */
+}
+
+/* Efecto hover para los botones */
+.install-alert button:hover {
+  background-color: #45a049; /* Cambio a un verde más oscuro */
+}
+
+/* Efecto hover para el botón "Cerrar" */
+.install-alert button:last-child:hover {
+  background-color: #d32f2f; /* Cambio a un rojo más oscuro */
+}
