@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import TodoList from './TodoList';  // Mantener tu lista de tareas
-import './App.css';  // Asegúrate de que este archivo está importado
-
+import TodoList from './TodoList';  
+import './App.css';  
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showInstallAlert, setShowInstallAlert] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      setDeferredPrompt(event);
-    });
+    const isAppInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-    setTimeout(() => {
-      setShowInstallAlert(true);
-    }, 1000); // Opcional: espera 1 segundo antes de mostrar la alerta
+    if (!isAppInstalled) {
+      const handleBeforeInstallPrompt = (event) => {
+        event.preventDefault();
+        setDeferredPrompt(event);
+        setShowInstallAlert(true); 
+      };
+
+      window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+      return () => {
+        window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      };
+    }
   }, []);
 
   const handleInstallClick = async () => {
@@ -35,7 +41,6 @@ const App = () => {
 
   return (
     <div className="app">
-      {/* Mostrar alerta personalizada para la instalación */}
       {showInstallAlert && (
         <div className="install-alert">
           <p>¿Te gustaría instalar nuestra app?</p>
@@ -44,12 +49,9 @@ const App = () => {
         </div>
       )}
 
-      {/* Aquí está tu lista de tareas */}
       <TodoList />
     </div>
   );
 };
 
 export default App;
-
-//comentario
